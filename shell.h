@@ -10,7 +10,7 @@
 
 
 /* Function Prototypes */
-int child_process(char *args[]);
+void child_process(char *args[]);
 int main(void);
 int args_line(char *entry, char **arguments);
 char *handle_path(char *dire_path, char *command);
