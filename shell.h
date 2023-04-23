@@ -8,10 +8,14 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
+/* environ variable */
+extern char **environ;
 
 /* Function Prototypes */
 /**Task 0 and 1**/
 void child_process(char *args[]);
+void exit_Builtin(char *cmd);
+void env_Builtin(void);
 int main(void);
 
 /**Task 2 and 3 */
