@@ -6,7 +6,7 @@
  */
 int main(void)
 {
-	char *cmd = NULL, *args[256];
+	char *cmd = NULL, *args[1024];
 	size_t n = 0;
 	ssize_t len;
 
@@ -23,15 +23,8 @@ int main(void)
 		}
 
 		cmd[len - 1] = '\0';
-		if (strcmp(cmd, "exit") == 0)
-		{
-			exit_Builtin(cmd);
-		}
-		else if (strcmp(cmd, "env") == 0 || strcmp(cmd, "printenv") == 0)
-		{
-			env_Builtin();
-			continue;
-		}
+		exit_Builtin(cmd);
+		env_Builtin(cmd);
 
 		args_line(cmd, args);
 
