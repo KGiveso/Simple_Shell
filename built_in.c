@@ -6,21 +6,30 @@
  */
 void exit_Builtin(char *cmd)
 {
-	free(cmd);
-	exit(EXIT_SUCCESS);
+	if (strcmp(cmd, "exit") == 0)
+	{
+		free(cmd);
+		exit(EXIT_SUCCESS);
+	}
 }
 
 /**
  * env_Builtin - implements the env built-in
  * and prints the current environment
+ * @cmd: env or printenv variable as input
  */
-void env_Builtin(void)
+void env_Builtin(char *cmd)
 {
-	char **env = environ;
+	char **env;
 
-	while (*env)
+	if (strcmp(cmd, "env") == 0 || strcmp(cmd, "printenv") == 0)
 	{
-		printf("%s\n", *env);
-		env++;
+		env = environ;
+
+		while (*env)
+		{
+			printf("%s\n", *env);
+			env++;
+		}
 	}
 }
