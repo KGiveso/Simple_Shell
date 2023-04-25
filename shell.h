@@ -20,14 +20,11 @@ int main(void);
 
 /**Task 2 and 3 */
 int args_line(char *entry, char **arguments);
-char *handle_path(char *dire_path, char *command);
+char *_path(char *cmd);
 
 /**Task 4 and 5*/
 void exit_Builtin(char *cmd);
 void child_process(char *args[]);
 
-/**Task 6 and 7*/
-char *get_static(void);
-char *_strdup(char *strt);
 
 #endif /*SHELL_H*/
