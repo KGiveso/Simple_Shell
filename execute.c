@@ -16,8 +16,17 @@ void child_process(char *args[])
 	}
 	else if (pid == 0)
 	{
-		execve(args[0], args, NULL);
+		char *cmd, *full_path;
+
+		cmd = args[0];
+		full_path = malloc(1024);
+
+		full_path = _path(cmd);
+
+		execve(full_path, args, NULL);
 		perror("Error");
+
+		free(full_path);
 		exit(EXIT_FAILURE);
 	}
 	else
