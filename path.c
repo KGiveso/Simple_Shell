@@ -1,91 +1,37 @@
 #include "shell.h"
-
 /**
- * _path - handles the PATH
- * @cmd: command read from input
- * Description: fork must not be called if the command doesn’t exist
- * Return:
+ * _path - Concatenates an input with paths in global variable PATH
+ * @cmd: directory string to be append with the command
+ * @command: command to be concatenated with the directory
+ * Return: Buffer to concatenated path
  */
-
-char *_path(char *cmd)
+char *_path(char *cmd, char *command)
 {
-	char *path, *full_path, *token;
-	size_t path_len, cmd_len;
-	struct strcat st = {0};
+	int a, b = 0, len1, len2;
+	char *command_path = NULL;
 
-	path = getenv("PATH");
-	if (path)
-	{
-		cmd_len = strlen(cmd);
-
-		token = strtok(path, ":");
-		while (token != NULL)
-		{
-			path_len = strlen(token);
-			full_path = malloc(cmd_len + path_len + 2);
-			strcpy(full_path, token);
-			strcat(full_path, "/");
-			strcat(full_path, cmd);
-
-			if (strcat(full_path, &st) == 0)
-			{
-				return (full_path);
-			}
-			else
-			{
-				free(full_path);
-				token = strtok(NULL, ":");
-
-			}
-		}
-
-		if (strcat(cmd, &st) == 0)
-		{
-			return (cmd);
-		}
+	if (cmd == NULL || command == NULL)
 		return (NULL);
-	}
-	else
-	{
+
+	len1 = strlen(cmd);
+	len2 = strlen(command);
+	command_path = malloc(len1 + len2 + 2);
+	if (command_path == NULL)
 		return (NULL);
-	}
-}
-
-
-/**
- * child_process - creates a new process to execute the commands
- * @args: the array of pointers to arguments to execute
- */
-void child_process(char *args[])
-{
-	int status;
-	pid_t pid;
-
-	pid = fork();
-
-	if (pid == -1)
+	for (a = 0; cmd[a] != '\0'; a++)
 	{
-		perror("Error");
-		exit(EXIT_FAILURE);
+		command_path[a] = cmd[a];
 	}
-	else if (pid == 0)
+	if (cmd[a - 1] != '/')
 	{
-		char *cmd, *full_path;
-
-		cmd = args[0];
-		full_path = malloc(1024);
-
-		full_path = _path(cmd);
-
-		execve(full_path, args, NULL);
-		perror("Error");
-
-		free(full_path);
-		exit(EXIT_FAILURE);
+		command_path[a] = '/';
+		a++;
 	}
-	else
+	while (command[b] != '\0')
 	{
-		wait(&status);
-
+		command_path[a + b] = command[b];
+		b++;
 	}
+	command_path[a + b] = '\0';
+	return (command_path);
 }
