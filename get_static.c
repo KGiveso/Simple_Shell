@@ -9,7 +9,7 @@ static char buffer[1024];
 static int pos;
 static int size;
 char *line = NULL;
-int i = 0;
+int i = 0, j;
 
 while (1)
 {
@@ -31,7 +31,7 @@ if (line == NULL)
 perror("malloc");
 exit(EXIT_FAILURE);
 }
-for (int j = 0; j < i; j++)
+for (j = 0; j < i; j++)
 {
 line[j] = buffer[j];
 }
