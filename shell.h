@@ -14,6 +14,7 @@ extern char **environ;
 /* function prototypes */
 char **tokenize(char *cmd, char *delim, int *tokens);
 char *_path(char *cmd);
+char *_getenv(char *name);
 void child_process(char **args);
 void _free(char **args);
 int _strlen(char *str);
