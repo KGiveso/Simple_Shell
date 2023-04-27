@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * putchar - writes a character to stdout
+ * _putchar - writes a character to stdout
  * @x: The character to print
  *
  * Return: 1 on success while -1 is returned
