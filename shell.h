@@ -22,5 +22,4 @@ char *_strcat(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
 char *_strdup(char *s1);
 void exit_env(char *cmd);
-
 #endif
