@@ -1,27 +1,38 @@
 #ifndef SHELL_H
 #define SHELL_H
 
+/*Libraries*/
 #include <stdio.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
+#include <fcntl.h>
+#include <limits.h>
+#include <time.h>
 
-/* global variable */
+/*Extension Functions*/
 extern char **environ;
 
-/* function prototypes */
-char **tokenize(char *cmd, char *delim, int *tokens);
-char *_path(char *cmd);
-char *_getenv(char *name);
-void child_process(char **args);
-void _free(char **args);
-int _strlen(char *str);
-char *_strcpy(char *dest, char *src);
-char *_strcat(char *dest, char *src);
-int _strcmp(char *s1, char *s2);
-char *_strdup(char *s1);
-void exit_env(char *cmd);
+/*Function Prototypes*/
+int _strcmp(char *cmd, char *argv);
+int _path(char **strings);
+int _builtin(char **strings, int exit_stat);
+char *_env(char *local_var);
+char *_strdup(char *std);
+char *append_command(char *dir_path, char *instruct);
+int _fprint(const char *prompt, unsigned int sizes);
+void _freed(char *in);
+int _inputs(char *in, char **strings);
+int stat_error(int n);
+int _error(char **strings, int count);
+int _putchar(char c);
+int _file(char *pathfile);
+int _execute(char **strings);
+void _grid(char **grid, int altitude);
+int _strlen(const char *std);
+
 
 #endif
