@@ -1,7 +1,7 @@
 # 0x16. C - Simple Shell
 
-*Description 
-This is simple_shell task that involves teamwork.
+# Description 
+ This is simple_shell task that involves teamwork.
 In this project C language, betty linter and gcc will be used effctively in solving all task available.
 
 * The are total of 16 tasks: 5 mandatory and 11 advanced.
