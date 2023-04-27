@@ -1,39 +1,62 @@
-#include "shell.h"
+#include "shell.h"#include "shell.h"
 
 /**
- * main - runs a UNIX command line interpreter
+ * _free - frees array and its elements
+ * @args: array to free
+ */
+void _free(char **args)
+{
+	int i = 0;
+
+	while (args[i])
+	{
+		free(args[i++]);
+	}
+	free(args);
+}
+
+/**
+ * main - runs UNIX interpreter
+ * @ac: number of arguments passed
+ * @av: array of arguments;
  * Return: 0 (success)
  */
-
-int main(void)
+int main(int ac, char **av)
 {
-	char *cmd = NULL, *args[100];
+	char *cmd = NULL, **args;
 	size_t n = 0;
 	ssize_t line;
-	int i;
+	int max_args;
+
+	if (ac < 1)
+		return (1);
 
 	while (1)
 	{
-		printf("shell$ ");
-		fflush(stdout);
+		if (isatty(STDIN_FILENO))
+		{
+			write(2, "$ ", _strlen("$ "));
+			fflush(stdout);
+		}
 
 		line = getline(&cmd, &n, stdin);
 		if (line == -1)
 		{
-			printf("\n");
+			if (isatty(STDIN_FILENO))
+			{
+				write(2, "\n", _strlen("\n"));
+			}
 			break;
 		}
 
 		cmd[line - 1] = '\0';
 
-		for (i = 0; i < 2; i++)
-		{
-			args[i] = cmd;
-			cmd = NULL;
-		}
+		exit_env(cmd);
 
+		args = tokenize(cmd, " ", &max_args);
 		child_process(args);
 	}
+	_free(args);
 	free(cmd);
 	return (0);
 }
