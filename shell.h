@@ -11,5 +11,5 @@
 extern char **environ;
 
 void child_process(char *argv[]);
-
+int args_line(char *argc, char **argv);
 #endif
