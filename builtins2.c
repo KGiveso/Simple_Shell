@@ -31,6 +31,7 @@ int _builtin(char **strings, int exit_stat)
 		if (environ == NULL)
 			return (0);
 		int j = 0;
+
 		while (environ[j] != NULL)
 		{
 			write(1, environ[j], _strlen(environ[j]));
